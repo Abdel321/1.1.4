@@ -1,0 +1,23 @@
+public class FactorielEff {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(17 / 2);
+
+		FactorielEff peri = new FactorielEff();
+		System.out.println(peri.perimetre(3));
+		FactorielEff ar = new FactorielEff();
+		System.out.println(ar.air(3));
+	}
+
+	private static double perimetre(int r) {
+		double p = 0;
+		p = (double) (2 * Math.PI * r);
+		return p;
+	}
+
+	private static double air(int r) {
+		double aire = 0;
+		aire = Math.PI * r * r;
+		return aire;
+	}
