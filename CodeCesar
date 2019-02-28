@@ -1,0 +1,33 @@
+//Class main
+package com.m2i;
+
+public class Cryptographie {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Chiffrement cryp = new Chiffrement(); //Instance de la class traitant decryptage
+		cryp.codeCesar("erhklr", 12);         //Appel de la methode de decryptage
+	}
+
+}
+//Class de traitement decryptage
+package com.m2i;
+
+public class Chiffrement {
+
+	public void codeCesar(String str, int val) {
+		char alphabet[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+				's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+		int j = 0, r = 0;
+		String result = "";
+		for (int i = 0; i < str.length(); i++) {
+			for (int v = 0; v < alphabet.length; v++) {
+				if (str.charAt(i) == alphabet[v]) {
+					r = v + val <= 25 ? v + val : (v + val) % 26; //Opérateur ternaire pour calculer indice module nbr totale lettre alphabet
+					result = result + alphabet[r];
+				}
+			}
+		}
+		System.out.print(result);
+	}
+}
