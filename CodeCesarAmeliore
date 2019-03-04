@@ -1,0 +1,40 @@
+package com.m2i;
+
+public class Cryptographie {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Chiffrement cryp = new Chiffrement();
+		Chiffrement.codeCesar("jght, jordylf; jhfr", 5);
+	}
+
+}
+
+package com.m2i;
+
+public class Chiffrement {
+
+	public static void codeCesar(String str, int val) {
+		char alphabet[] = new char[26];
+		for (int i = 0; i < 26; i++) {
+			alphabet[i] = (char) (i + 97);
+		}
+		int r = 0;
+		String result = "", strg = "";
+		strg = str.toLowerCase();
+		for (int i = 0; i < strg.length(); i++) {
+			boolean isCharAlpha = false;                // On ne traite pas tous les caractères spéciaux, les valeurs numériques 
+			for (int v = 0; v < alphabet.length; v++) { //et les lettre accentuées.
+				if (strg.charAt(i) == alphabet[v]) {
+					r = v + val <= 25 ? v + val : (v + val) % 26;
+					result = result + alphabet[r];
+					isCharAlpha = true;
+				}
+			}
+			if (isCharAlpha == false) {
+				result = result + strg.charAt(i);
+			}
+		}
+		System.out.print(result);
+	}
+}
