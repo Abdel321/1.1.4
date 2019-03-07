@@ -1,0 +1,47 @@
+package com.m2i;
+
+public class Cryptographie {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Chiffrement cryp = new Chiffrement();
+		Chiffrement.vigenere("blanCHe ; hegfr ; :jlkem iutop !stnrwzsuw", "drb");
+	}
+}
+package com.m2i;
+
+import java.util.HashMap;
+
+public class Chiffrement {
+	public static void vigenere(String str, String cle) {
+		char alphabet[] = new char[26];
+		for (int i = 0; i < 26; i++) {
+			alphabet[i] = (char) (i + 97);
+		}
+		int r = 0, p = 0;
+		String result = "";
+		str = str.toLowerCase().replaceAll(" ", "");
+		for (int i = 0; i < str.length(); i++) {
+			boolean isCharAlpha = false;
+			for (int j = 0; j <= (i % cle.length()); j++) {
+				for (int w = 0; w < 26; w++) {
+					if (str.charAt(i) == alphabet[w]) {
+						p = w;
+						isCharAlpha = true;
+					}
+					if (cle.charAt(j) == alphabet[w]) {
+						r = w;
+					}
+				}
+			}
+			if (isCharAlpha == true) {
+				result = result + alphabet[(p + r) % 26];
+			} else {
+				result = result + str.charAt(i);
+			}
+
+		}
+		System.out.println("string = " + str);
+		System.out.println("result = " + result);
+	}
+  }
