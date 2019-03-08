@@ -1,0 +1,77 @@
+package com.m2i;
+//Class main
+public class Cryptographie {
+
+	public static void main(String[] args) {
+  		// TODO Auto-generated method stub
+		Chiffrement cryp = new Chiffrement();
+    //Test successifs afin de vérifier le dechiffrement
+    Chiffrement.vigenereAmeliore("il doit certainement partir en voyage et revenir rapidement", "iyzpo");
+		Chiffrement.vigenereDechiffre("qjcdwbadghigmtamlseozrhgsvtnnoocdifmtdcwzpzewlcltbb", "iyzpo");
+		Chiffrement.vigenereAmeliore("il etait une fois un vehicule", "cgl");
+		Chiffrement.vigenereDechiffre("krpvgtvayglzkyfpbpjonwrp", "cgl");
+		Chiffrement.vigenereAmeliore("AvIon a reaction", "cgl");
+		Chiffrement.vigenereDechiffre("cbtqtltkleztqt", "cgl");
+	}
+
+}
+//Classe de chiffrement utilisée dans le main
+package com.m2i;
+
+import java.util.HashMap;
+
+public class Chiffrement {
+//Méthode permettant de chiffrer
+public static void vigenereAmeliore(String str, String cle) {
+		int n = 0, m = 0;
+		String result = "";
+		str = str.toLowerCase().replaceAll(" ", "");
+		HashMap<Character, Integer> map = new HashMap<>();
+		char alphabet[] = new char[26];
+		for (int i = 0; i < 26; i++) {
+			alphabet[i] = (char) (i + 97);
+			map.put(alphabet[i], i);
+		}		
+		for (int i = 0; i < str.length(); i++) {
+			if (map.containsKey(str.charAt(i))) {
+				n = map.get(str.charAt(i));
+			}
+			if (map.containsKey(cle.charAt(i % cle.length()))) {
+				m = map.get(cle.charAt(i % cle.length()));
+			}
+			result = result + alphabet[(m + n) % 26];
+		}
+		System.out.println("string = " + str);
+		System.out.println("result = " + result);
+	}
+//Methode permettant de déchiffer. Nécessité de prendre le résultat du chiffrement donnée par la méthode ci-dessus
+//et de la mettre en parametre d'entrée de vigenereDechiffre(String str, String cle) en utilisant la meme cle.
+	public static void vigenereDechiffre(String str, String cle) {
+		int n = 0, m = 0, p = 0;
+		String result = "";
+		str = str.toLowerCase().replaceAll(" ", "");
+		HashMap<Character, Integer> map = new HashMap<>();
+		char alphabet[] = new char[26];
+		for (int i = 0; i < 26; i++) {
+			alphabet[i] = (char) (i + 97);
+			map.put(alphabet[i], i);
+		}
+		for (int i = 0; i < str.length(); i++) {
+			if (map.containsKey(str.charAt(i))) {
+				n = map.get(str.charAt(i));
+			}
+			if (map.containsKey(cle.charAt(i % cle.length()))) {
+				m = map.get(cle.charAt(i % cle.length()));
+			}
+			if (m > n) {
+				p = 26 - (m - n) % 26;
+				result = result + alphabet[p];
+			} else {
+				p = (n - m) % 26;
+				result = result + alphabet[p];
+			}
+		}
+		System.out.println("string = " + str);
+		System.out.println("result = " + result);
+	}
+}
