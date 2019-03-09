@@ -1,0 +1,45 @@
+package com.m2i;
+//Classe principale permettant l'execution du programme
+public class Cryptographie {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Chiffrement cryp = new Chiffrement();
+Chiffrement.assembler("mes vieilles tantes", 3);
+	}
+}
+
+//Classe réalisant le traitement
+package com.m2i;
+
+import java.util.HashMap;
+
+public class Chiffrement {
+public static void assembler(String str, int nbr) {
+		HashMap<Integer, Character> map = new HashMap<>();
+		str = str.toLowerCase().replaceAll(" ", "");
+		String result = "", ass = "", bdr = "";
+		int n = 0, v = 0;
+		for (int i = 0; i < str.length(); i++) {
+			map.put(i, str.charAt(i));
+			result = result + map.get(i);
+		}
+		for (int j = 0; j < str.length(); j++) {
+    //Petit problème de nbr multiple de la longueur du texte difficile a resoudre
+			if (str.length() % nbr == 0) {
+				ass = ass + map.get(n % str.length());
+				v = n + nbr;
+				n = (n + nbr) % str.length();
+				if (v >= str.length()) {
+					n = n + 1;
+				}
+			} else {
+				ass = ass + map.get(n % str.length());
+				n = (n + nbr) % str.length();
+
+			}
+		}
+		System.out.println("result = " + result);
+		System.out.println("assem = " + ass);
+	}
+}
